@@ -1,0 +1,8 @@
+"0","mydata %>% "
+"0","  ggplot(aes(EARNINGS)) +"
+"0","    geom_histogram(bins = 35, "
+"0","                   color = ""black"", "
+"0","                   fill = ""white"") +"
+"0","    ylab("""") + "
+"0","    xlab("""") +"
+"0","    ggtitle(""Histograms of Earnings (Frequency)"")  "

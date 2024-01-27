@@ -1,0 +1,3 @@
+"0","#install.packages(""wbstats"")"
+"0","library(wbstats)"
+"0","gdp_data <- wb_data(country = c(""AF"",""CA""), indicator = ""NY.GDP.PCAP.CD"")"

@@ -1,0 +1,8 @@
+"0","#SP500"
+"0","ggplot(SP500, aes(x = rolling_monthly_return)) +"
+"0","    geom_histogram(bins = 100, "
+"0","                   color = ""black"", "
+"0","                   fill = ""white"") +"
+"0","    ylab("""") + "
+"0","    xlab("""") +"
+"0","    ggtitle(""Histogram of SP500 monthly returns"") "

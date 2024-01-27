@@ -1,0 +1,4 @@
+"0","# create and add a new variable"
+"0","mydata %>% "
+"0","  mutate(EDUCUNI = EDUCBA + EDUCMAST) %>%"
+"0","  head(3)"

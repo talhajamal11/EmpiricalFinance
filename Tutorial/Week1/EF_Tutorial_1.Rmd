@@ -1,0 +1,211 @@
+---
+title: "EF_Tutorial_1"
+author: "Gillian"
+output:
+  pdf_document: default
+  html_document: default
+---
+## Packages 
+```{r, warning=F, message=F}
+package_name <- "tidyverse"
+
+# Check if the package is installed
+if (!requireNamespace(package_name, quietly = TRUE)) {
+  # If not installed, install the package
+  install.packages(package_name)}
+
+library(package_name, character.only = TRUE)
+```
+
+##Basic functions 
+If you are not familiar with the function and want to get more info, add "?" at the front of the function to check its documentation (e.g. ?read_csv).
+
+## Data importing 
+```{r, warning=F, message=F}
+library(tidyverse)
+mydata <- read_csv("eaef21.csv") # load the dataset eaef21.csv into R 
+#mydata <- read_csv("C:/Users/gilli/OneDrive/Documents/EF_tutorial_1/eaef21.csv")
+
+#Sometimes your data is only available as a xlxs file.
+#example <-read_exel(example)
+
+#More info on importing various types of data https://github.com/rstudio/cheatsheets/blob/main/data-import.pdf
+
+#Here is the chapter on data importing from "R for Data Sicence" https://r4ds.had.co.nz/data-import.html
+```
+
+#API 
+#Can use API packages to access data without downloading it. This is very useful when dealing with large dataset or with ones that update regularly 
+```{r}
+#install.packages("wbstats")
+library(wbstats)
+gdp_data <- wb_data(country = c("AF","CA"), indicator = "NY.GDP.PCAP.CD")
+```
+
+```{r}
+class(mydata)   # class will show us the type of object 'mydata'
+mydata <- as.data.frame(mydata)   # change object to data.frame
+class(mydata)
+```
+
+```{r, results = 'hide'}
+head(mydata)     # shows the first 6 rows of your dataset
+tail(mydata)    # shows the last 6 rows of your dataset
+```
+```{r}
+summary(mydata) # gives you a simple summary of your dataset (not very nice looking)
+```
+
+```{r}
+nrow(mydata)    # gives the number of rows
+```
+
+```{r}
+ncol(mydata)    # gives the number of columns
+```
+
+The object mydata is a data.frame, i.e. a dataset with named columns. We can perform operations by rows and by columns with function apply.
+```{r}
+# this will apply function class to each column of the dataset
+apply(mydata,     # the dataset to work on
+      MARGIN = 2, # 1 to work by rows and 2 by columns
+      FUN = mean) # the function to apply
+```
+
+```{r, eval=FALSE}
+rm(gdp_data) # remove R object from environment
+```
+
+## Tidyverse
+Tidyverse is a nice R package combining several packages for datamanagement and plotting, including \textbf{dplyr} \textbf{tidyr} and \textbf{ggplot2}. This package allows us to easily manipulate data.
+
+```{r, warning=F, message=F}
+if(!require(tidyverse)){install.packages("tidyverse")}
+library(tidyverse)          # Package for data manipulation
+
+# the following code gives same result as 
+# mean(mydata$EARNINGS)
+mydata %>% 
+  summarize(mean(EARNINGS))
+```
+
+Create new varables with mutate.
+```{r}
+# create and add a new variable
+mydata %>% 
+  mutate(EDUCUNI = EDUCBA + EDUCMAST) %>%
+  head(3)
+```
+
+
+Perform operations by clusters.
+```{r}
+# mutate/summarize by groups
+mydata %>% 
+  group_by(FEMALE) %>%
+  summarize(mean(EXP))
+```
+```{r}
+mydata %>% 
+  group_by(MARRIED) %>%
+  mutate(DHOURS = HOURS - mean(HOURS)) %>%
+  head()
+```
+
+Perform more operations at the same time
+```{r}
+# you can also 'filter' rows and 'select' columns
+mydata %>%
+  mutate(AGE_D = ifelse(AGE <= 40, "below 40", "above 40")) %>%
+  group_by(AGE_D) %>%
+  summarise(mean(EARNINGS), mean(HOURS))
+```
+
+
+Pick only columns and observations we are interested into.
+```{r}
+# you can also 'filter' rows and 'select' columns
+mydata %>% 
+  filter(AGE > 40) %>%
+  select(EARNINGS, EXP, FEMALE) %>%
+  head()
+```
+
+In the above example we are using a pipe "%>%". This comes from the package magrittr and is compatible with all tidyverse packages. 
+
+Here we complete the same but ussing the classic R approach
+```{R}
+# classic R
+classic <- filter(mydata, AGE > 40)
+classic1 <- select(classic,c(EARNINGS, EXP, FEMALE))
+classic2 <- head(classic1)
+print(classic2)
+```
+
+Now, let’s put that in practice!
+Can you write some code to compare the average male and female earnings for above 40 year olds with a masters 
+```{r}
+avg_earnings <- mydata %>%
+  filter(AGE > 40, EDUCMAST == 1) %>%
+  group_by(MALE) %>%
+  summarize(AverageEarnings = mean(EARNINGS, na.rm = TRUE))
+
+head(avg_earnings)
+# 0 represents women
+# 1 represents men
+```
+
+# Univariate analysis
+
+We can also easily plot our data. We can use histograms for numerical variables.
+```{r}
+mydata %>% 
+  ggplot(aes(EARNINGS)) +
+    geom_histogram(bins = 35, 
+                   color = "black", 
+                   fill = "white") +
+    ylab("") + 
+    xlab("") +
+    ggtitle("Histograms of Earnings (Frequency)")  
+```
+
+We can add a density line, but we need to show histograms as probabilities.
+```{r}
+mydata %>% 
+  ggplot(aes(EARNINGS)) +
+    geom_histogram(aes(y = after_stat(density)),
+                   bins = 100, 
+                   color = "grey30", 
+                   fill = "white") +
+        geom_density(alpha = .2, 
+                     fill = "antiquewhite3") +
+    ylab("") + 
+    xlab("") +
+    ggtitle("Histograms of Earnings (Density)")  
+```
+
+For qualitative analysis you can try for yourself geom_bar() and geom_count().
+
+## Univariate regression
+```{r}
+mod0 <- mydata %>%
+  lm(log(EARNINGS) ~ EXP, data = .)
+  
+mod0 %>% summary()
+```
+
+
+# Multivariate analysis
+We can now start with multiple linear regression model.
+```{r}
+mod1 <- mydata %>%
+  lm(log(EARNINGS) ~ AGE + EXP + 
+       EDUCPROF + EDUCPHD + 
+       EDUCMAST + EDUCBA + 
+       EDUCAA + EDUCHSD + 
+       EDUCDO, data = .)
+  
+mod1 %>% summary()
+```
+
+

@@ -1,0 +1,6 @@
+"0","#SP500"
+"0","ggplot(SP500, aes(x = rolling_monthly_return, y = rolling_log_monthly_return)) +"
+"0","  geom_point() +"
+"0","  labs(title = ""Simple vs Log Monthly Returns of SP500"", "
+"0","       x = ""Monthly return"", "
+"0","       y = ""Log Monthly return"")"

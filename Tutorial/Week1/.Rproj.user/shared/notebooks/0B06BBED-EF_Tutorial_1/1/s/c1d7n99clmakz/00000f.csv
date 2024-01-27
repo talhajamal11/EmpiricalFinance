@@ -1,0 +1,8 @@
+"0","package_name <- ""tidyverse"""
+"0",""
+"0","# Check if the package is installed"
+"0","if (!requireNamespace(package_name, quietly = TRUE)) {"
+"0","  # If not installed, install the package"
+"0","  install.packages(package_name)}"
+"0",""
+"0","library(package_name, character.only = TRUE)"

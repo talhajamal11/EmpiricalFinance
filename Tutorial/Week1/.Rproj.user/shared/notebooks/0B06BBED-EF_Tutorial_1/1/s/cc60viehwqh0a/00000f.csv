@@ -1,0 +1,7 @@
+"0","if(!require(tidyverse)){install.packages(""tidyverse"")}"
+"0","library(tidyverse)          # Package for data manipulation"
+"0",""
+"0","# the following code gives same result as "
+"0","# mean(mydata$EARNINGS)"
+"0","mydata %>% "
+"0","  summarize(mean(EARNINGS))"

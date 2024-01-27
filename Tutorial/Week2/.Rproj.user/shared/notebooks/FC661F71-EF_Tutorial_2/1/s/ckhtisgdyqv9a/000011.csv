@@ -1,0 +1,5 @@
+"0","ggplot(GBPUSD, aes(x = daily_return, y = log_daily_return)) +"
+"0","  geom_point() +"
+"0","  labs(title = ""Log Daily Returns of GBPUSD"", "
+"0","       x = ""Daily Return"", "
+"0","       y = ""Log Daily Return"")"

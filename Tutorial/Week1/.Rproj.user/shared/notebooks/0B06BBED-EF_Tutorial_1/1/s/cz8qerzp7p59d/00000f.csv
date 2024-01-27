@@ -1,0 +1,5 @@
+"0","# you can also 'filter' rows and 'select' columns"
+"0","mydata %>%"
+"0","  mutate(AGE_D = ifelse(AGE <= 40, ""below 40"", ""above 40"")) %>%"
+"0","  group_by(AGE_D) %>%"
+"0","  summarise(mean(EARNINGS), mean(HOURS))"

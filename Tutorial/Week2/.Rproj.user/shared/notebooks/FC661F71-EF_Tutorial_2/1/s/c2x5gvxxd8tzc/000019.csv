@@ -1,0 +1,7 @@
+"0",""
+"0","# "
+"0","n <- 10000"
+"0","rand_unifs<- data.frame(x = runif(n, min = 0, max = 10)) #runif will give us a uniform distribution "
+"0","rand_unifs %>%"
+"0","  ggplot(aes(x=x)) + "
+"0","    geom_histogram(binwidth=1) "

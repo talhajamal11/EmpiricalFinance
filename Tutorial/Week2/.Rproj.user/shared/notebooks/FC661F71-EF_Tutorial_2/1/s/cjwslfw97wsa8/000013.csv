@@ -1,0 +1,8 @@
+"0","#FFR"
+"0","ggplot(FFR, aes(x = rolling_log_monthly_return)) +"
+"0","    geom_histogram(bins = 100, "
+"0","                   color = ""black"", "
+"0","                   fill = ""white"") +"
+"0","    ylab("""") + "
+"0","    xlab("""") +"
+"0","    ggtitle(""Histogram of FFR log monthly returns"") "

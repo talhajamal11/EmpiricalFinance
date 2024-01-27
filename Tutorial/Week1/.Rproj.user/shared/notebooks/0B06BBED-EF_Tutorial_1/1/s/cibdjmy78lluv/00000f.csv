@@ -1,0 +1,4 @@
+"0","mydata %>% "
+"0","  group_by(MARRIED) %>%"
+"0","  mutate(DHOURS = HOURS - mean(HOURS)) %>%"
+"0","  head()"

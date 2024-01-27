@@ -1,0 +1,4 @@
+"0","# mutate/summarize by groups"
+"0","mydata %>% "
+"0","  group_by(FEMALE) %>%"
+"0","  summarize(mean(EXP))"

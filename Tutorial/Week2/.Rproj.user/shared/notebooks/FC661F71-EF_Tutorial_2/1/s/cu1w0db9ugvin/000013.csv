@@ -1,0 +1,6 @@
+"0","#FFR"
+"0","ggplot(FFR, aes(x = rolling_monthly_return, y = rolling_log_monthly_return)) +"
+"0","  geom_point() +"
+"0","  labs(title = ""Simple vs Log Monthly Returns of FFR"", "
+"0","       x = ""Monthly return"", "
+"0","       y = ""Log Monthly return"")"

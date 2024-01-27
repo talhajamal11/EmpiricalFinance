@@ -1,0 +1,5 @@
+"0","# classic R"
+"0","classic <- filter(mydata, AGE > 40)"
+"0","classic1 <- select(classic,c(EARNINGS, EXP, FEMALE))"
+"0","classic2 <- head(classic1)"
+"0","print(classic2)"

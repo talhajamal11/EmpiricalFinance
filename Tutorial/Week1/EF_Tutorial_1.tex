@@ -1,0 +1,699 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={EF\_Tutorial\_1},
+  pdfauthor={Gillian},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{EF\_Tutorial\_1}
+\author{Gillian}
+\date{}
+
+\begin{document}
+\maketitle
+
+\hypertarget{packages}{%
+\subsection{Packages}\label{packages}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{package\_name }\OtherTok{\textless{}{-}} \StringTok{"tidyverse"}
+
+\CommentTok{\# Check if the package is installed}
+\ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{requireNamespace}\NormalTok{(package\_name, }\AttributeTok{quietly =} \ConstantTok{TRUE}\NormalTok{)) \{}
+  \CommentTok{\# If not installed, install the package}
+  \FunctionTok{install.packages}\NormalTok{(package\_name)\}}
+
+\FunctionTok{library}\NormalTok{(package\_name, }\AttributeTok{character.only =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\#\#Basic functions If you are not familiar with the function and want
+to get more info, add ``?'' at the front of the function to check its
+documentation (e.g.~?read\_csv).
+
+\hypertarget{data-importing}{%
+\subsection{Data importing}\label{data-importing}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\NormalTok{mydata }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"eaef21.csv"}\NormalTok{) }\CommentTok{\# load the dataset eaef21.csv into R }
+\CommentTok{\#mydata \textless{}{-} read\_csv("C:/Users/gilli/OneDrive/Documents/EF\_tutorial\_1/eaef21.csv")}
+
+\CommentTok{\#Sometimes your data is only available as a xlxs file.}
+\CommentTok{\#example \textless{}{-}read\_exel(example)}
+
+\CommentTok{\#More info on importing various types of data https://github.com/rstudio/cheatsheets/blob/main/data{-}import.pdf}
+
+\CommentTok{\#Here is the chapter on data importing from "R for Data Sicence" https://r4ds.had.co.nz/data{-}import.html}
+\end{Highlighting}
+\end{Shaded}
+
+\#API \#Can use API packages to access data without downloading it. This
+is very useful when dealing with large dataset or with ones that update
+regularly
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#install.packages("wbstats")}
+\FunctionTok{library}\NormalTok{(wbstats)}
+\NormalTok{gdp\_data }\OtherTok{\textless{}{-}} \FunctionTok{wb\_data}\NormalTok{(}\AttributeTok{country =} \FunctionTok{c}\NormalTok{(}\StringTok{"AF"}\NormalTok{,}\StringTok{"CA"}\NormalTok{), }\AttributeTok{indicator =} \StringTok{"NY.GDP.PCAP.CD"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(mydata)   }\CommentTok{\# class will show us the type of object \textquotesingle{}mydata\textquotesingle{}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "spec_tbl_df" "tbl_df"      "tbl"         "data.frame"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mydata }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(mydata)   }\CommentTok{\# change object to data.frame}
+\FunctionTok{class}\NormalTok{(mydata)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "data.frame"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(mydata)     }\CommentTok{\# shows the first 6 rows of your dataset}
+\FunctionTok{tail}\NormalTok{(mydata)    }\CommentTok{\# shows the last 6 rows of your dataset}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(mydata) }\CommentTok{\# gives you a simple summary of your dataset (not very nice looking)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        ID            FEMALE         MALE        ETHBLACK         ETHHISP       
+##  Min.   :   18   Min.   :0.0   Min.   :0.0   Min.   :0.0000   Min.   :0.00000  
+##  1st Qu.: 1525   1st Qu.:0.0   1st Qu.:0.0   1st Qu.:0.0000   1st Qu.:0.00000  
+##  Median : 2788   Median :0.5   Median :0.5   Median :0.0000   Median :0.00000  
+##  Mean   : 3330   Mean   :0.5   Mean   :0.5   Mean   :0.1056   Mean   :0.05185  
+##  3rd Qu.: 4399   3rd Qu.:1.0   3rd Qu.:1.0   3rd Qu.:0.0000   3rd Qu.:0.00000  
+##  Max.   :12110   Max.   :1.0   Max.   :1.0   Max.   :1.0000   Max.   :1.00000  
+##                                                                                
+##     ETHWHITE           AGE              S            EDUCPROF       
+##  Min.   :0.0000   Min.   :37.00   Min.   : 7.00   Min.   :0.000000  
+##  1st Qu.:1.0000   1st Qu.:39.00   1st Qu.:12.00   1st Qu.:0.000000  
+##  Median :1.0000   Median :41.00   Median :13.00   Median :0.000000  
+##  Mean   :0.8426   Mean   :40.92   Mean   :13.67   Mean   :0.007407  
+##  3rd Qu.:1.0000   3rd Qu.:43.00   3rd Qu.:16.00   3rd Qu.:0.000000  
+##  Max.   :1.0000   Max.   :45.00   Max.   :20.00   Max.   :1.000000  
+##                                                                     
+##     EDUCPHD            EDUCMAST           EDUCBA           EDUCAA       
+##  Min.   :0.000000   Min.   :0.00000   Min.   :0.0000   Min.   :0.00000  
+##  1st Qu.:0.000000   1st Qu.:0.00000   1st Qu.:0.0000   1st Qu.:0.00000  
+##  Median :0.000000   Median :0.00000   Median :0.0000   Median :0.00000  
+##  Mean   :0.001852   Mean   :0.05185   Mean   :0.1944   Mean   :0.08889  
+##  3rd Qu.:0.000000   3rd Qu.:0.00000   3rd Qu.:0.0000   3rd Qu.:0.00000  
+##  Max.   :1.000000   Max.   :1.00000   Max.   :1.0000   Max.   :1.00000  
+##                                                                         
+##     EDUCHSD           EDUCDO            SINGLE          MARRIED      
+##  Min.   :0.0000   Min.   :0.00000   Min.   :0.0000   Min.   :0.0000  
+##  1st Qu.:0.0000   1st Qu.:0.00000   1st Qu.:0.0000   1st Qu.:0.0000  
+##  Median :1.0000   Median :0.00000   Median :0.0000   Median :1.0000  
+##  Mean   :0.5481   Mean   :0.07778   Mean   :0.1481   Mean   :0.6574  
+##  3rd Qu.:1.0000   3rd Qu.:0.00000   3rd Qu.:0.0000   3rd Qu.:1.0000  
+##  Max.   :1.0000   Max.   :1.00000   Max.   :1.0000   Max.   :1.0000  
+##                                                                      
+##     DIVORCED          FAITHN            FAITHP            FAITHC       
+##  Min.   :0.0000   Min.   :-3.0000   Min.   :-3.0000   Min.   :-3.0000  
+##  1st Qu.:0.0000   1st Qu.: 0.0000   1st Qu.: 0.0000   1st Qu.: 0.0000  
+##  Median :0.0000   Median : 0.0000   Median : 1.0000   Median : 0.0000  
+##  Mean   :0.1944   Mean   : 0.0463   Mean   : 0.4963   Mean   : 0.3204  
+##  3rd Qu.:0.0000   3rd Qu.: 0.0000   3rd Qu.: 1.0000   3rd Qu.: 1.0000  
+##  Max.   :1.0000   Max.   : 1.0000   Max.   : 1.0000   Max.   : 1.0000  
+##                                                                        
+##      FAITHJ              FAITHO           ASVAB01      ASVAB02     
+##  Min.   :-3.000000   Min.   :-3.0000   Min.   :22   Min.   :31.00  
+##  1st Qu.: 0.000000   1st Qu.: 0.0000   1st Qu.:44   1st Qu.:42.00  
+##  Median : 0.000000   Median : 0.0000   Median :50   Median :50.00  
+##  Mean   :-0.003704   Mean   : 0.1111   Mean   :50   Mean   :50.48  
+##  3rd Qu.: 0.000000   3rd Qu.: 0.0000   3rd Qu.:56   3rd Qu.:58.00  
+##  Max.   : 1.000000   Max.   : 1.0000   Max.   :68   Max.   :66.00  
+##                                                                    
+##     ASVAB03         ASVAB04         ASVAB05         ASVAB06     
+##  Min.   :24.00   Min.   :20.00   Min.   :20.00   Min.   :22.00  
+##  1st Qu.:44.00   1st Qu.:47.00   1st Qu.:46.00   1st Qu.:45.00  
+##  Median :52.00   Median :53.00   Median :52.00   Median :51.00  
+##  Mean   :49.71   Mean   :50.36   Mean   :50.78   Mean   :50.22  
+##  3rd Qu.:57.00   3rd Qu.:56.00   3rd Qu.:59.00   3rd Qu.:57.00  
+##  Max.   :61.00   Max.   :62.00   Max.   :62.00   Max.   :72.00  
+##                                                                 
+##      ASVABC          HEIGHT         WEIGHT85        WEIGHT02         SM       
+##  Min.   :25.46   Min.   :48.00   Min.   : 95.0   Min.   : 95   Min.   : 0.00  
+##  1st Qu.:44.54   1st Qu.:64.00   1st Qu.:129.0   1st Qu.:150   1st Qu.:11.00  
+##  Median :52.72   Median :67.00   Median :155.0   Median :180   Median :12.00  
+##  Mean   :51.36   Mean   :67.67   Mean   :156.7   Mean   :184   Mean   :11.58  
+##  3rd Qu.:58.72   3rd Qu.:71.00   3rd Qu.:178.0   3rd Qu.:210   3rd Qu.:12.00  
+##  Max.   :66.08   Max.   :80.00   Max.   :322.0   Max.   :400   Max.   :20.00  
+##                                                                               
+##        SF           SIBLINGS         LIBRARY           POV78       
+##  Min.   : 0.00   Min.   : 0.000   Min.   :0.0000   Min.   :0.0000  
+##  1st Qu.:10.00   1st Qu.: 2.000   1st Qu.:1.0000   1st Qu.:0.0000  
+##  Median :12.00   Median : 3.000   Median :1.0000   Median :0.0000  
+##  Mean   :11.84   Mean   : 3.274   Mean   :0.7796   Mean   :0.1306  
+##  3rd Qu.:14.00   3rd Qu.: 4.000   3rd Qu.:1.0000   3rd Qu.:0.0000  
+##  Max.   :20.00   Max.   :13.000   Max.   :1.0000   Max.   :1.0000  
+##                                                    NA's   :27      
+##       EXP            EARNINGS          HOURS           TENURE        
+##  Min.   : 1.154   Min.   :  2.13   Min.   :10.00   Min.   : 0.01923  
+##  1st Qu.:14.596   1st Qu.: 10.76   1st Qu.:40.00   1st Qu.: 1.93750  
+##  Median :17.510   Median : 16.00   Median :40.00   Median : 4.69231  
+##  Mean   :16.900   Mean   : 19.64   Mean   :40.53   Mean   : 7.03397  
+##  3rd Qu.:20.197   3rd Qu.: 23.16   3rd Qu.:45.00   3rd Qu.:10.98077  
+##  Max.   :23.558   Max.   :120.19   Max.   :60.00   Max.   :24.94231  
+##                                                                      
+##     COLLBARG         CATGOV           CATPRI           CATSE        
+##  Min.   :0.000   Min.   :0.0000   Min.   :0.0000   Min.   :0.00000  
+##  1st Qu.:0.000   1st Qu.:0.0000   1st Qu.:1.0000   1st Qu.:0.00000  
+##  Median :0.000   Median :0.0000   Median :1.0000   Median :0.00000  
+##  Mean   :0.187   Mean   :0.2278   Mean   :0.7537   Mean   :0.01852  
+##  3rd Qu.:0.000   3rd Qu.:0.0000   3rd Qu.:1.0000   3rd Qu.:0.00000  
+##  Max.   :1.000   Max.   :1.0000   Max.   :1.0000   Max.   :1.00000  
+##                                                                     
+##      URBAN            REGNE            REGNC            REGW       
+##  Min.   :0.0000   Min.   :0.0000   Min.   :0.000   Min.   :0.0000  
+##  1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.000   1st Qu.:0.0000  
+##  Median :1.0000   Median :0.0000   Median :0.000   Median :0.0000  
+##  Mean   :0.7241   Mean   :0.1426   Mean   :0.337   Mean   :0.1574  
+##  3rd Qu.:1.0000   3rd Qu.:0.0000   3rd Qu.:1.000   3rd Qu.:0.0000  
+##  Max.   :2.0000   Max.   :1.0000   Max.   :1.000   Max.   :1.0000  
+##                                                                    
+##       REGS      
+##  Min.   :0.000  
+##  1st Qu.:0.000  
+##  Median :0.000  
+##  Mean   :0.363  
+##  3rd Qu.:1.000  
+##  Max.   :1.000  
+## 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{nrow}\NormalTok{(mydata)    }\CommentTok{\# gives the number of rows}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 540
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ncol}\NormalTok{(mydata)    }\CommentTok{\# gives the number of columns}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 51
+\end{verbatim}
+
+The object mydata is a data.frame, i.e.~a dataset with named columns. We
+can perform operations by rows and by columns with function apply.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# this will apply function class to each column of the dataset}
+\FunctionTok{apply}\NormalTok{(mydata,     }\CommentTok{\# the dataset to work on}
+      \AttributeTok{MARGIN =} \DecValTok{2}\NormalTok{, }\CommentTok{\# 1 to work by rows and 2 by columns}
+      \AttributeTok{FUN =}\NormalTok{ mean) }\CommentTok{\# the function to apply}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            ID        FEMALE          MALE      ETHBLACK       ETHHISP 
+##  3.330191e+03  5.000000e-01  5.000000e-01  1.055556e-01  5.185185e-02 
+##      ETHWHITE           AGE             S      EDUCPROF       EDUCPHD 
+##  8.425926e-01  4.091852e+01  1.367222e+01  7.407407e-03  1.851852e-03 
+##      EDUCMAST        EDUCBA        EDUCAA       EDUCHSD        EDUCDO 
+##  5.185185e-02  1.944444e-01  8.888889e-02  5.481481e-01  7.777778e-02 
+##        SINGLE       MARRIED      DIVORCED        FAITHN        FAITHP 
+##  1.481481e-01  6.574074e-01  1.944444e-01  4.629630e-02  4.962963e-01 
+##        FAITHC        FAITHJ        FAITHO       ASVAB01       ASVAB02 
+##  3.203704e-01 -3.703704e-03  1.111111e-01  4.999630e+01  5.047593e+01 
+##       ASVAB03       ASVAB04       ASVAB05       ASVAB06        ASVABC 
+##  4.970926e+01  5.035556e+01  5.077963e+01  5.022222e+01  5.136271e+01 
+##        HEIGHT      WEIGHT85      WEIGHT02            SM            SF 
+##  6.767407e+01  1.567481e+02  1.840130e+02  1.157963e+01  1.183704e+01 
+##      SIBLINGS       LIBRARY         POV78           EXP      EARNINGS 
+##  3.274074e+00  7.796296e-01            NA  1.690036e+01  1.963622e+01 
+##         HOURS        TENURE      COLLBARG        CATGOV        CATPRI 
+##  4.053148e+01  7.033974e+00  1.870370e-01  2.277778e-01  7.537037e-01 
+##         CATSE         URBAN         REGNE         REGNC          REGW 
+##  1.851852e-02  7.240741e-01  1.425926e-01  3.370370e-01  1.574074e-01 
+##          REGS 
+##  3.629630e-01
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{rm}\NormalTok{(gdp\_data) }\CommentTok{\# remove R object from environment}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{tidyverse}{%
+\subsection{Tidyverse}\label{tidyverse}}
+
+Tidyverse is a nice R package combining several packages for
+datamanagement and plotting, including \textbf{dplyr} \textbf{tidyr} and
+\textbf{ggplot2}. This package allows us to easily manipulate data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(tidyverse))\{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"tidyverse"}\NormalTok{)\}}
+\FunctionTok{library}\NormalTok{(tidyverse)          }\CommentTok{\# Package for data manipulation}
+
+\CommentTok{\# the following code gives same result as }
+\CommentTok{\# mean(mydata$EARNINGS)}
+\NormalTok{mydata }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarize}\NormalTok{(}\FunctionTok{mean}\NormalTok{(EARNINGS))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   mean(EARNINGS)
+## 1       19.63622
+\end{verbatim}
+
+Create new varables with mutate.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# create and add a new variable}
+\NormalTok{mydata }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{EDUCUNI =}\NormalTok{ EDUCBA }\SpecialCharTok{+}\NormalTok{ EDUCMAST) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{head}\NormalTok{(}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     ID FEMALE MALE ETHBLACK ETHHISP ETHWHITE AGE  S EDUCPROF EDUCPHD EDUCMAST
+## 1 5531      0    1        0       0        1  45 12        0       0        0
+## 2 2658      0    1        0       1        0  40 12        0       0        0
+## 3 5365      0    1        0       0        1  38 15        0       0        0
+##   EDUCBA EDUCAA EDUCHSD EDUCDO SINGLE MARRIED DIVORCED FAITHN FAITHP FAITHC
+## 1      0      0       1      0      0       1        0      0      1      0
+## 2      0      0       0      1      0       0        1      1      0      0
+## 3      0      1       0      0      0       0        1      0      0      0
+##   FAITHJ FAITHO ASVAB01 ASVAB02 ASVAB03 ASVAB04 ASVAB05 ASVAB06   ASVABC HEIGHT
+## 1      0      0      58      64      52      56      54      56 60.89985     67
+## 2      0      0      32      39      29      29      27      22 33.63790     67
+## 3      0      1      42      40      37      38      42      45 38.81767     69
+##   WEIGHT85 WEIGHT02 SM SF SIBLINGS LIBRARY POV78       EXP EARNINGS HOURS
+## 1      160      200  8  8       11       0     0 22.384615    53.41    45
+## 2      185      205  5  5        3       0     1  8.903846     8.00    40
+## 3      135      185 11 12        3       1     0 13.250000    24.00    40
+##     TENURE COLLBARG CATGOV CATPRI CATSE URBAN REGNE REGNC REGW REGS EDUCUNI
+## 1 2.750000        0      0      1     0     0     0     0    0    1       0
+## 2 2.384615        0      0      1     0     0     0     0    0    1       0
+## 3 5.750000        1      0      1     0     1     0     1    0    0       0
+\end{verbatim}
+
+Perform operations by clusters.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# mutate/summarize by groups}
+\NormalTok{mydata }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(FEMALE) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}\FunctionTok{mean}\NormalTok{(EXP))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2 x 2
+##   FEMALE `mean(EXP)`
+##    <dbl>       <dbl>
+## 1      0        17.9
+## 2      1        15.9
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mydata }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(MARRIED) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{DHOURS =}\NormalTok{ HOURS }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(HOURS)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{head}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 52
+## # Groups:   MARRIED [2]
+##      ID FEMALE  MALE ETHBLACK ETHHISP ETHWHITE   AGE     S EDUCPROF EDUCPHD
+##   <dbl>  <dbl> <dbl>    <dbl>   <dbl>    <dbl> <dbl> <dbl>    <dbl>   <dbl>
+## 1  5531      0     1        0       0        1    45    12        0       0
+## 2  2658      0     1        0       1        0    40    12        0       0
+## 3  5365      0     1        0       0        1    38    15        0       0
+## 4  4468      0     1        0       0        1    43    13        0       0
+## 5  3142      0     1        0       0        1    38    18        0       0
+## 6  2170      0     1        1       0        0    39    16        0       0
+## # i 42 more variables: EDUCMAST <dbl>, EDUCBA <dbl>, EDUCAA <dbl>,
+## #   EDUCHSD <dbl>, EDUCDO <dbl>, SINGLE <dbl>, MARRIED <dbl>, DIVORCED <dbl>,
+## #   FAITHN <dbl>, FAITHP <dbl>, FAITHC <dbl>, FAITHJ <dbl>, FAITHO <dbl>,
+## #   ASVAB01 <dbl>, ASVAB02 <dbl>, ASVAB03 <dbl>, ASVAB04 <dbl>, ASVAB05 <dbl>,
+## #   ASVAB06 <dbl>, ASVABC <dbl>, HEIGHT <dbl>, WEIGHT85 <dbl>, WEIGHT02 <dbl>,
+## #   SM <dbl>, SF <dbl>, SIBLINGS <dbl>, LIBRARY <dbl>, POV78 <dbl>, EXP <dbl>,
+## #   EARNINGS <dbl>, HOURS <dbl>, TENURE <dbl>, COLLBARG <dbl>, ...
+\end{verbatim}
+
+Perform more operations at the same time
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# you can also \textquotesingle{}filter\textquotesingle{} rows and \textquotesingle{}select\textquotesingle{} columns}
+\NormalTok{mydata }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{AGE\_D =} \FunctionTok{ifelse}\NormalTok{(AGE }\SpecialCharTok{\textless{}=} \DecValTok{40}\NormalTok{, }\StringTok{"below 40"}\NormalTok{, }\StringTok{"above 40"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(AGE\_D) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\FunctionTok{mean}\NormalTok{(EARNINGS), }\FunctionTok{mean}\NormalTok{(HOURS))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2 x 3
+##   AGE_D    `mean(EARNINGS)` `mean(HOURS)`
+##   <chr>               <dbl>         <dbl>
+## 1 above 40             19.9          40.3
+## 2 below 40             19.3          40.8
+\end{verbatim}
+
+Pick only columns and observations we are interested into.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# you can also \textquotesingle{}filter\textquotesingle{} rows and \textquotesingle{}select\textquotesingle{} columns}
+\NormalTok{mydata }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(AGE }\SpecialCharTok{\textgreater{}} \DecValTok{40}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(EARNINGS, EXP, FEMALE) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{head}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   EARNINGS      EXP FEMALE
+## 1    53.41 22.38461      0
+## 2    29.50 18.25000      0
+## 3    11.78 22.03846      0
+## 4    27.30 16.38461      0
+## 5    55.05 17.30769      0
+## 6    12.30 22.40385      0
+\end{verbatim}
+
+In the above example we are using a pipe ``\%\textgreater\%''. This
+comes from the package magrittr and is compatible with all tidyverse
+packages.
+
+Here we complete the same but ussing the classic R approach
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# classic R}
+\NormalTok{classic }\OtherTok{\textless{}{-}} \FunctionTok{filter}\NormalTok{(mydata, AGE }\SpecialCharTok{\textgreater{}} \DecValTok{40}\NormalTok{)}
+\NormalTok{classic1 }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(classic,}\FunctionTok{c}\NormalTok{(EARNINGS, EXP, FEMALE))}
+\NormalTok{classic2 }\OtherTok{\textless{}{-}} \FunctionTok{head}\NormalTok{(classic1)}
+\FunctionTok{print}\NormalTok{(classic2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   EARNINGS      EXP FEMALE
+## 1    53.41 22.38461      0
+## 2    29.50 18.25000      0
+## 3    11.78 22.03846      0
+## 4    27.30 16.38461      0
+## 5    55.05 17.30769      0
+## 6    12.30 22.40385      0
+\end{verbatim}
+
+Now, let's put that in practice! Can you write some code to compare the
+average male and female earnings for above 40 year olds with a masters
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{avg\_earnings }\OtherTok{\textless{}{-}}\NormalTok{ mydata }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(AGE }\SpecialCharTok{\textgreater{}} \DecValTok{40}\NormalTok{, EDUCMAST }\SpecialCharTok{==} \DecValTok{1}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(MALE) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{AverageEarnings =} \FunctionTok{mean}\NormalTok{(EARNINGS, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{))}
+
+\FunctionTok{head}\NormalTok{(avg\_earnings)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2 x 2
+##    MALE AverageEarnings
+##   <dbl>           <dbl>
+## 1     0            23.7
+## 2     1            30.3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 0 represents women}
+\CommentTok{\# 1 represents men}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{univariate-analysis}{%
+\section{Univariate analysis}\label{univariate-analysis}}
+
+We can also easily plot our data. We can use histograms for numerical
+variables.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mydata }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(EARNINGS)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{bins =} \DecValTok{35}\NormalTok{, }
+                   \AttributeTok{color =} \StringTok{"black"}\NormalTok{, }
+                   \AttributeTok{fill =} \StringTok{"white"}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{ylab}\NormalTok{(}\StringTok{""}\NormalTok{) }\SpecialCharTok{+} 
+    \FunctionTok{xlab}\NormalTok{(}\StringTok{""}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"Histograms of Earnings (Frequency)"}\NormalTok{)  }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{EF_Tutorial_1_files/figure-latex/unnamed-chunk-19-1.pdf}
+
+We can add a density line, but we need to show histograms as
+probabilities.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mydata }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(EARNINGS)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_histogram}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =} \FunctionTok{after\_stat}\NormalTok{(density)),}
+                   \AttributeTok{bins =} \DecValTok{100}\NormalTok{, }
+                   \AttributeTok{color =} \StringTok{"grey30"}\NormalTok{, }
+                   \AttributeTok{fill =} \StringTok{"white"}\NormalTok{) }\SpecialCharTok{+}
+        \FunctionTok{geom\_density}\NormalTok{(}\AttributeTok{alpha =}\NormalTok{ .}\DecValTok{2}\NormalTok{, }
+                     \AttributeTok{fill =} \StringTok{"antiquewhite3"}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{ylab}\NormalTok{(}\StringTok{""}\NormalTok{) }\SpecialCharTok{+} 
+    \FunctionTok{xlab}\NormalTok{(}\StringTok{""}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"Histograms of Earnings (Density)"}\NormalTok{)  }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{EF_Tutorial_1_files/figure-latex/unnamed-chunk-20-1.pdf}
+
+For qualitative analysis you can try for yourself geom\_bar() and
+geom\_count().
+
+\hypertarget{univariate-regression}{%
+\subsection{Univariate regression}\label{univariate-regression}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mod0 }\OtherTok{\textless{}{-}}\NormalTok{ mydata }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{lm}\NormalTok{(}\FunctionTok{log}\NormalTok{(EARNINGS) }\SpecialCharTok{\textasciitilde{}}\NormalTok{ EXP, }\AttributeTok{data =}\NormalTok{ .)}
+  
+\NormalTok{mod0 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{summary}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = log(EARNINGS) ~ EXP, data = .)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -2.00515 -0.41689 -0.03241  0.35866  2.02727 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 2.449410   0.098823  24.786  < 2e-16 ***
+## EXP         0.020271   0.005656   3.584  0.00037 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.5822 on 538 degrees of freedom
+## Multiple R-squared:  0.02332,    Adjusted R-squared:  0.0215 
+## F-statistic: 12.84 on 1 and 538 DF,  p-value: 0.0003695
+\end{verbatim}
+
+\hypertarget{multivariate-analysis}{%
+\section{Multivariate analysis}\label{multivariate-analysis}}
+
+We can now start with multiple linear regression model.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mod1 }\OtherTok{\textless{}{-}}\NormalTok{ mydata }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{lm}\NormalTok{(}\FunctionTok{log}\NormalTok{(EARNINGS) }\SpecialCharTok{\textasciitilde{}}\NormalTok{ AGE }\SpecialCharTok{+}\NormalTok{ EXP }\SpecialCharTok{+} 
+\NormalTok{       EDUCPROF }\SpecialCharTok{+}\NormalTok{ EDUCPHD }\SpecialCharTok{+} 
+\NormalTok{       EDUCMAST }\SpecialCharTok{+}\NormalTok{ EDUCBA }\SpecialCharTok{+} 
+\NormalTok{       EDUCAA }\SpecialCharTok{+}\NormalTok{ EDUCHSD }\SpecialCharTok{+} 
+\NormalTok{       EDUCDO, }\AttributeTok{data =}\NormalTok{ .)}
+  
+\NormalTok{mod1 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{summary}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = log(EARNINGS) ~ AGE + EXP + EDUCPROF + EDUCPHD + 
+##     EDUCMAST + EDUCBA + EDUCAA + EDUCHSD + EDUCDO, data = .)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1.77593 -0.32854 -0.03132  0.30212  2.01786 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  3.671919   0.411639   8.920  < 2e-16 ***
+## AGE         -0.030217   0.009872  -3.061 0.002319 ** 
+## EXP          0.036813   0.005303   6.942 1.13e-11 ***
+## EDUCPROF     1.322317   0.281213   4.702 3.29e-06 ***
+## EDUCPHD      0.135952   0.518411   0.262 0.793232    
+## EDUCMAST     0.244102   0.158043   1.545 0.123057    
+## EDUCBA       0.123178   0.134919   0.913 0.361672    
+## EDUCAA      -0.247465   0.145376  -1.702 0.089296 .  
+## EDUCHSD     -0.437111   0.129628  -3.372 0.000801 ***
+## EDUCDO      -0.651896   0.148039  -4.404 1.29e-05 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.5024 on 530 degrees of freedom
+## Multiple R-squared:  0.2835, Adjusted R-squared:  0.2714 
+## F-statistic: 23.31 on 9 and 530 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\end{document}

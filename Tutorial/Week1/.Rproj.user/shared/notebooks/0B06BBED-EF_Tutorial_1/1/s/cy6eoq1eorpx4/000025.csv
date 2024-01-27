@@ -1,0 +1,6 @@
+"0","avg_earnings <- mydata %>%"
+"0","  filter(AGE > 40, EDUCMAST == 1) %>%"
+"0","  group_by(MALE) %>%"
+"0","  summarize(AverageEarnings = mean(EARNINGS, na.rm = TRUE))"
+"0",""
+"0","head(avg_earnings)"
