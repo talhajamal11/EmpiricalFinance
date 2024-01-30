@@ -1,0 +1,420 @@
+---
+title: "EF_Tutorial_3"
+output:
+  pdf_document: default
+date: "2024-01-25"
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(readxl)
+library(zoo)
+library(quantmod)
+library(stargazer)
+library(tinytex)
+library(rmarkdown)
+```
+
+## Exersice 1
+
+```{r}
+rm(list = ls())
+set.seed(12345)
+```
+
+
+```{r pressure, echo=FALSE}
+#Set our time period 
+n <- 1000
+#Set our constants according to the problem 
+c <- 0.2
+beta <- 0.1
+delta <- 0.05
+phi_1 <- 0.4
+phi_2 <- 0.3
+phi_3 <- 0.2
+theta_1 <- 0.4
+theta_2 <- 0.3
+sigma <- 1
+
+#Generate our error term 
+epsilon <- rnorm(1000, mean = 0, sd = 1)
+
+# Generate the trend
+tt = (1:n)
+t2 = (1:n)^2
+
+#Create a data frame 
+time_series <- data.frame(period = 1:n,
+  yt_1 = c + epsilon,
+  yt_2 = numeric(n),
+  yt_3 = numeric(n),
+  yt_4 = numeric(n),
+  yt_5 = numeric(n),
+  yt_6 = numeric(n),
+  yt_7 = numeric(n),
+  yt_8 = numeric(n))
+
+for (t in 1:n){
+  time_series$yt_2[t] <- c + beta*tt[t] + delta*t2[t] + epsilon[t]
+}
+
+# Calculate unconditional mean and volatility
+emean =         c/(1-phi_1)
+evar  = (sigma^2)/(1-(phi_1^2))
+
+
+# Initialize the time series vector with normal shock
+time_series$yt_1[1] <- rnorm(1, mean = emean, sd = evar) #starting value
+time_series$yt_2[1] <- rnorm(1, mean = emean, sd = evar) 
+time_series$yt_3[1] <- rnorm(1, mean = emean, sd = evar)   
+time_series$yt_4[1] <- rnorm(1, mean = emean, sd = evar) 
+time_series$yt_5[1] <- rnorm(1, mean = emean, sd = evar) 
+time_series$yt_6[1] <- rnorm(1, mean = emean, sd = evar) 
+time_series$yt_7[1] <- rnorm(1, mean = emean, sd = evar) 
+time_series$yt_8[1] <- rnorm(1, mean = emean, sd = evar) 
+
+
+for (t in 2:n){
+  time_series$yt_3[t] <- c + time_series$yt_3[t-1] + epsilon[t]
+  time_series$yt_4[t] <- c + phi_1*time_series$yt_4[t-1] + epsilon[t]  
+  time_series$yt_6[t] <- c + epsilon[t] + theta_1*epsilon[t-1] 
+  time_series$yt_8[t] <- c + phi_1*time_series$yt_8[t-1] + epsilon[t] + theta_1*epsilon[t-1]    
+}
+
+for (t in 3:n){
+  time_series$yt_7[t] <- c + epsilon[t] + theta_1*epsilon[t-1] + theta_2*epsilon[t-2] 
+}
+
+for (t in 4:n){
+  time_series$yt_5[t] <- c + phi_1*time_series$yt_5[t-1] + phi_2*time_series$yt_5[t-2] + phi_3*time_series$yt_5[t-3] + epsilon[t] 
+}
+
+
+```
+#White noise
+```{r}
+time_series %>%
+  ggplot(aes(x = period, y=yt_1))+
+    geom_line()
+
+acf(time_series$yt_1)
+acf(time_series$yt_1, type = "partial")
+```
+
+#Trend stationary
+```{r}
+time_series %>%
+  ggplot(aes(x = period, y=yt_2))+
+    geom_line()
+
+acf(time_series$yt_2)
+acf(time_series$yt_2, type = "partial")
+```
+
+#Random walk
+```{r}
+
+time_series %>%
+  ggplot(aes(x = period, y=yt_3))+
+    geom_line()
+
+acf(time_series$yt_3)
+acf(time_series$yt_3, type = "partial")
+```
+
+#AR(1)
+```{r}
+
+time_series %>%
+  ggplot(aes(x = period, y=yt_4))+
+    geom_line()
+
+acf(time_series$yt_4)
+acf(time_series$yt_4, type = "partial")
+```
+
+#AR(3)
+```{r}
+
+time_series %>%
+  ggplot(aes(x = period, y=yt_5))+
+    geom_line()
+
+acf(time_series$yt_5)
+acf(time_series$yt_5, type = "partial")
+```
+
+#MA(1)
+```{r}
+
+time_series %>%
+  ggplot(aes(x = period, y=yt_6))+
+    geom_line()
+
+acf(time_series$yt_6)
+acf(time_series$yt_6, type = "partial")
+```
+
+#MA(2)
+```{r}
+
+time_series %>%
+  ggplot(aes(x = period, y=yt_7))+
+    geom_line()
+
+acf(time_series$yt_7)
+acf(time_series$yt_7, type = "partial")
+```
+
+#ARMA(1)
+```{r}
+
+time_series %>%
+  ggplot(aes(x = period, y=yt_7))+
+    geom_line()
+
+acf(time_series$yt_7)
+acf(time_series$yt_7, type = "partial")
+```
+
+# Exersice 2
+
+```{r }
+#read data
+SP500 <- read_excel("data_3.xlsx")
+GBPUSD <- read_excel("data_3.xlsx", sheet = 2)
+TBILL <- read_excel("data_3.xlsx", sheet = 3)
+VIX <- read_excel("data_3.xlsx", sheet = 4)
+
+#mutate to returns 
+SP500 <- SP500 %>%
+  mutate(daily_return = log((SP500)/lag(SP500)))
+
+
+GBPUSD <- GBPUSD %>%
+  mutate(daily_return = log((GBPUSD)/lag(GBPUSD)))
+
+TBILL <- TBILL %>%
+  mutate(daily_return = log((TBILL)/lag(TBILL)))
+
+VIX <- VIX %>%
+  mutate(daily_return = log((VIX)/lag(VIX)))
+
+```
+
+```{r}
+#plot to make sure data looks right
+#SP500
+ggplot(SP500, aes(x = date, y = daily_return)) +
+  geom_line() +
+  labs(title = "Daily Returns of SP500", 
+       x = "Date", 
+       y = "Daily Return")
+#GBPUSD
+ggplot(GBPUSD, aes(x = date, y = daily_return)) +
+  geom_line() +
+  labs(title = "Daily Returns of GBPUSD", 
+       x = "Date", 
+       y = "Daily Return")
+#TBILL
+ggplot(TBILL, aes(x = date, y = daily_return)) +
+  geom_line() +
+  labs(title = "Daily Returns of TBILL", 
+       x = "Date", 
+       y = "Daily Return")
+#VIX
+ggplot(VIX, aes(x = date, y = daily_return)) +
+  geom_line() +
+  labs(title = "Daily Returns of VIX", 
+       x = "Date", 
+       y = "Daily Return")
+```
+
+# Model selection 
+#https://bookdown.org/steve_midway/DAR/model-selection.html
+#https://www.quantstart.com/articles/Autoregressive-Moving-Average-ARMA-p-q-Models-for-Time-Series-Analysis-Part-3/ 
+# We now need to select the best way to model the appropriate time-series specification, and estimate the key parameters
+
+```{r}
+#SP500
+SP500 <- na.omit(SP500)
+acf(SP500$daily_return)
+acf(SP500$daily_return, type = "partial")
+```
+
+```{r}
+#SP500 fitting 
+SP500_model <- arima(SP500$daily_return, order = c(0, 0, 1))
+```
+
+```{r}
+residuals <- residuals(SP500_model)
+plot(residuals, main = "Residuals of SP500 AR(1) Model")
+acf(residuals)
+Box.test(residuals, lag=20, type = "Ljung-Box")
+```
+
+```{r}
+#GPBUSD
+GBPUSD <- na.omit(GBPUSD)
+acf(GBPUSD$daily_return)
+acf(GBPUSD$daily_return, type = "partial")
+```
+
+```{r}
+#GPBUSD fitting 
+GBPUSD_model <- arima(GBPUSD$daily_return, order = c(0, 0, 1))
+```
+
+```{r}
+residuals <- residuals(GBPUSD_model)
+plot(residuals, main = "Residuals of GBPUSD MA(1) Model")
+acf(residuals)
+Box.test(residuals, lag=20, type = "Ljung-Box")
+```
+
+```{r}
+#TBILL
+TBILL <- na.omit(TBILL)
+TBILL <- TBILL$daily_return[is.finite(TBILL$daily_return)]
+acf(TBILL)
+acf(TBILL, type = "partial")
+```
+
+
+```{r}
+#TBILL fitting 
+TBILL_model <- arima(TBILL, order = c(1, 0, 1))
+```
+
+```{r}
+residuals <- residuals(TBILL_model)
+plot(residuals, main = "Residuals of TBILL AR(1) Model")
+acf(residuals)
+Box.test(residuals, lag=20, type = "Ljung-Box")
+```
+
+```{r}
+
+# Function to fit ARIMA models and return AIC
+fit_arima <- function(p, d, q) {
+  model <- arima(TBILL, order = c(p, d, q))
+  return(AIC(model))
+}
+
+# Define a range of values for p, d, and q
+p_values <- c(0, 1, 2,3,4,5)
+d_values <- c(0, 1)
+q_values <- c(0, 1, 2,3,4,5)
+
+# Initialize variables
+best_aic <- Inf
+best_order <- c(0, 0, 0)
+
+# Loop through combinations of p, d, and q
+for (p in p_values) {
+  for (d in d_values) {
+    for (q in q_values) {
+      # Skip combinations that are not feasible
+      if (p + d + q <= 2) {
+        current_aic <- fit_arima(p, d, q)
+        
+        # Update if the current AIC is better
+        if (current_aic < best_aic) {
+          best_aic <- current_aic
+          best_order <- c(p, d, q)
+        }
+      }
+    }
+  }
+}
+
+# Fit the best model
+best_model <- arima(TBILL, order = best_order)
+
+# Print the best order and AIC
+cat("Best Order (p, d, q):", best_order, "\n")
+cat("Best AIC:", best_aic, "\n")
+```
+
+
+```{r}
+#VIX
+VIX <- na.omit(VIX)
+acf(VIX$daily_return)
+acf(VIX$daily_return, type = "partial")
+```
+
+```{r}
+#VIX fitting 
+VIX_model <- arima(VIX$daily_return, order = c(1, 0, 1))
+
+```
+
+```{r}
+residuals <- residuals(VIX_model)
+plot(residuals, main = "Residuals of VIX ARMA(1) Model")
+acf(residuals)
+Box.test(residuals, lag=20, type = "Ljung-Box")
+```
+
+```{r}
+
+# Function to fit ARIMA models and return AIC
+fit_arima <- function(p, d, q) {
+  model <- arima(VIX$daily_return, order = c(p, d, q))
+  return(AIC(model))
+}
+
+# Define a range of values for p, d, and q
+p_values <- c(0, 1, 2,3,4,5)
+d_values <- c(0, 1)
+q_values <- c(0, 1, 2,3,4,5)
+
+# Initialize variables
+best_aic <- Inf
+best_order <- c(0, 0, 0)
+
+# Loop through combinations of p, d, and q
+for (p in p_values) {
+  for (d in d_values) {
+    for (q in q_values) {
+      # Skip combinations that are not feasible
+      if (p + d + q <= 2) {
+        current_aic <- fit_arima(p, d, q)
+        
+        # Update if the current AIC is better
+        if (current_aic < best_aic) {
+          best_aic <- current_aic
+          best_order <- c(p, d, q)
+        }
+      }
+    }
+  }
+}
+
+# Fit the best model
+best_model <- arima(VIX$daily_return, order = best_order)
+
+# Print the best order and AIC
+cat("Best Order (p, d, q):", best_order, "\n")
+cat("Best AIC:", best_aic, "\n")
+```
+
+```{r echo=FALSE, results='asis'}
+#https://cran.r-project.org/web/packages/stargazer/vignettes/stargazer.pdf
+# Create a sample data frame
+data <- data.frame(
+  x1 = rnorm(100),
+  x2 = rnorm(100),
+  y = 2 * data$x1 + 3 * data$x2 + rnorm(100)
+)
+
+# Fit a linear regression model
+model <- lm(y ~ x1 + x2, data)
+
+# Print the regression table using stargazer
+#stargazer(model, title = "Regression Results", align = TRUE)
+stargazer(attitude, type="text", title = "Attitude summary", align = TRUE)
+```
