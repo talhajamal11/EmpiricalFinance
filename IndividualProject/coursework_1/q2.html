@@ -7680,7 +7680,7 @@ a.anchor-link {
 <span class="n">expanding_benchmark_prediction</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">expanding_actual</span> <span class="o">=</span> <span class="p">[]</span>
 
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">us_data</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span> <span class="c1">#2784</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">us_data</span><span class="p">),</span> <span class="mi">1</span><span class="p">):</span> <span class="c1">#2784</span>
     <span class="c1">#setup data</span>
     <span class="n">x_train</span> <span class="o">=</span> <span class="n">us_data</span><span class="p">[[</span><span class="s1">'xt_1'</span><span class="p">]][:</span><span class="n">i</span><span class="p">]</span>
     <span class="n">y_train</span> <span class="o">=</span> <span class="n">us_data</span><span class="p">[[</span><span class="s1">'Log Returns'</span><span class="p">]][:</span><span class="n">i</span><span class="p">]</span>
@@ -7717,9 +7717,9 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>0.001945448402323024 0.0019370741194388087
-The out of sample R squared is:  -0.004323160791927627
-The Delta RMSE is:  -9.503331749566996e-05
+<pre>0.0019454232126486569 0.0019369644602004765
+The out of sample R squared is:  -0.00436701479143542
+The Delta RMSE is:  -9.599356601911607e-05
 </pre>
 </div>
 </div>
@@ -7747,7 +7747,7 @@ The Delta RMSE is:  -9.503331749566996e-05
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7760,7 +7760,7 @@ The Delta RMSE is:  -9.503331749566996e-05
 <span class="n">rolling_benchmark_prediction</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">rolling_actual</span> <span class="o">=</span> <span class="p">[]</span>
 
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">us_data</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span> <span class="c1">#2784</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">us_data</span><span class="p">),</span> <span class="mi">1</span><span class="p">):</span> <span class="c1">#2784</span>
     <span class="c1">#setup data</span>
     <span class="n">start</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">120</span>
     <span class="n">x_train</span> <span class="o">=</span> <span class="n">us_data</span><span class="p">[[</span><span class="s1">'xt_1'</span><span class="p">]][</span><span class="n">start</span><span class="p">:</span><span class="n">i</span><span class="p">]</span>
@@ -7791,21 +7791,6 @@ The Delta RMSE is:  -9.503331749566996e-05
 </div>
 </div>
 </div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>0.0020666039279573947 0.0019483483741248551
-The out of sample R squared is:  -0.0606952819131521
-The Delta RMSE is:  -0.0013198162279665707
-</pre>
-</div>
-</div>
-</div>
-</div>
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
@@ -7828,7 +7813,7 @@ The Delta RMSE is:  -0.0013198162279665707
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7865,21 +7850,6 @@ The Delta RMSE is:  -0.0013198162279665707
 </div>
 </div>
 </div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Estimated rho_hat: -5.087598333120338e-06
-The CW Stat is:  -0.7830584157388782
-The P Value is: 0.7832035953701767
-</pre>
-</div>
-</div>
-</div>
-</div>
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
@@ -7902,7 +7872,7 @@ The P Value is: 0.7832035953701767
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7939,21 +7909,6 @@ The P Value is: 0.7832035953701767
 </div>
 </div>
 </div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Estimated p (intercept): -3.304335868527804e-06
-The CW Stat is:  -0.11451173595005465
-The P Value is: 0.545583928173363
-</pre>
-</div>
-</div>
-</div>
-</div>
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
@@ -7976,7 +7931,7 @@ The P Value is: 0.545583928173363
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8005,20 +7960,6 @@ The P Value is: 0.545583928173363
 </div>
 </div>
 </div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>P: 0.5155839279008637
-Z Score: 1.609176035148589
-</pre>
-</div>
-</div>
-</div>
-</div>
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
@@ -8041,7 +7982,7 @@ Z Score: 1.609176035148589
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8066,20 +8007,6 @@ Z Score: 1.609176035148589
 <span class="n">z_score</span> <span class="o">=</span> <span class="p">(</span><span class="n">p</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">p</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Z Score:"</span><span class="p">,</span> <span class="n">z_score</span><span class="p">)</span>
 </pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>P: 0.5336087119789711
-Z Score: 3.476568426313029
-</pre>
 </div>
 </div>
 </div>
