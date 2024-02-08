@@ -1,4 +1,4 @@
-# Imperial College London - Emprical Finance
+# Imperial College London - Empirical Finance
 
 The First [Coursework](IndividualProject/coursework_1) in this module involved running expanding and rolling window regressions to forecast returns out of sample on US and UK Stock Market Indices. 
 
